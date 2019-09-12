@@ -1,0 +1,38 @@
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+    </plugin-info>
+
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="jira-module"/>
+
+    <!-- add our web resources -->
+    <web-resource key="jira-module-resources" name="jira-module Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+
+        <resource type="download" name="jira-module.css" location="/css/jira-module.css"/>
+        <resource type="download" name="jira-module.js" location="/js/jira-module.js"/>
+        <resource type="download" name="images/" location="/images"/>
+
+        <context>jira-module</context>
+    </web-resource>
+
+    <web-item key="my-project-config-web-item" name="my-project-config web Item" section="atl.jira.proj.config/projectgroup3" weight="200">
+        <description key="my-project-config-web-item-desc">General description</description>
+        <label key="my-project-config-web-item-label"/>
+        <link linkId="my-project-config-web-item-link">/secure/MyProjectConfigWebAction!default.jspa?projectKey=${project.key}</link>
+    </web-item>
+    <webwork1 key="my-project-config-item-module" name="my-project-config Item Module" i18n-name-key="my-project-config-item-module.name">
+        <description key="my-project-config-item-module.description">The my-project-config Item Module Plugin</description>
+        <actions>
+            <action name="com.chy.action.MyProjectConfigWebAction" alias="MyProjectConfigWebAction">
+                <view name="input">templates/web-item/my-project-config.vm</view>
+            </action>
+        </actions>
+    </webwork1>
+
+</atlassian-plugin>
